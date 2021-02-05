@@ -1,5 +1,6 @@
 import React from 'react'
-import { Card, Backdrop, Fade, Modal, ModalBody, ModalHeader, Typography, makeStyles, CardContent, Button } from "@material-ui/core";
+import { Card, Backdrop, Fade, Modal, ModalBody, ModalHeader,  Typography, makeStyles, CardContent, Button } from "@material-ui/core";
+import CloseIcon from '@material-ui/icons/Close';
 import style from '../recipe.module.css'
 
 function Recipe({ key, title, image, clickAction, process }) {
@@ -18,6 +19,7 @@ function Recipe({ key, title, image, clickAction, process }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            margin: 100
             // padding: '100px'
         },
         paper: {
@@ -60,6 +62,7 @@ function Recipe({ key, title, image, clickAction, process }) {
                                         <p id="transition-modal-description"><p>{process}</p></p>
                                     </span>
                                 </CardContent>
+                                <Button onClick={handleClose} variant="outlined">Close</Button>
                             </Card>
                         </Fade>
                     </Modal>
