@@ -4,6 +4,7 @@ import style from '../recipe.module.css'
 function Recipe({title, calories, image, ingredients}) {
     return (
         <div className={style.recipe}>
+            <img className= {style.image} src={image} alt="" />
             <h1>{title}</h1>
             <ol>
                 {ingredients.map(ingredient => (
@@ -11,7 +12,6 @@ function Recipe({title, calories, image, ingredients}) {
                 ))}
             </ol>
             <p>{calories}</p>
-            <img className= {style.image} src={image} alt="" />
         </div> 
     )
 }

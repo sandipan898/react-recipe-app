@@ -18,7 +18,9 @@
 .search-bar {
   width: 50%;
   border: none;
+  border-radius: 5px;
   padding: 10px;
+  margin: 7px;
 }
 
 .search-btn {
@@ -26,6 +28,8 @@
   border: none;
   padding: 10px 20px;
   color: white;
+  border-radius: 5px;
+
 }
 
 .recipes {
