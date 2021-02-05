@@ -1,17 +1,11 @@
 import React from 'react'
 import style from '../recipe.module.css'
 
-function Recipe({title, calories, image, ingredients}) {
+function Recipe({key, title, image, clickAction}) {
     return (
-        <div className={style.recipe}>
+        <div onClick={()=> clickAction(key)} className={style.recipe}>
             <img className= {style.image} src={image} alt="" />
             <h1>{title}</h1>
-            <ol>
-                {ingredients.map(ingredient => (
-                    <li>{ingredient.text}</li>
-                ))}
-            </ol>
-            <p>{calories}</p>
         </div> 
     )
 }
