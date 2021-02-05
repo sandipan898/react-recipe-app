@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Backdrop, Fade, Modal, Typography, makeStyles, CardContent, Button } from "@material-ui/core";
+import { Card, Backdrop, Fade, Modal, ModalBody, ModalHeader, Typography, makeStyles, CardContent, Button } from "@material-ui/core";
 import style from '../recipe.module.css'
 
 function Recipe({ key, title, image, clickAction, process }) {
@@ -18,6 +18,7 @@ function Recipe({ key, title, image, clickAction, process }) {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            // padding: '100px'
         },
         paper: {
             backgroundColor: theme.palette.background.paper,
@@ -30,7 +31,6 @@ function Recipe({ key, title, image, clickAction, process }) {
 
     return (
         <div>
-
             <Card key={key} onClick={() => clickAction(key)} className={style.recipe}>
                 <CardContent align="center">
                     <span align="center">
@@ -38,27 +38,31 @@ function Recipe({ key, title, image, clickAction, process }) {
                         <Typography>{title}</Typography>
                         <Button onClick={handleOpen} variant="outline" color="primary">Show Process</Button>
                     </span>
-                    <span>
-                        <Modal
-                            aria-labelledby="transition-modal-title"
-                            aria-describedby="transition-modal-description"
-                            className={useStyles.modal}
-                            open={open}
-                            onClose={handleClose}
-                            closeAfterTransition
-                            BackdropComponent={Backdrop}
-                            BackdropProps={{
-                                timeout: 500,
-                            }}
-                        >
-                            <Fade in={open}>
-                                <div className={useStyles.paper}>
-                                    <h2 id="transition-modal-title">{title}</h2>
-                                    <p id="transition-modal-description"><p>{process}</p></p>
-                                </div>
-                            </Fade>
-                        </Modal>
-                    </span>
+                    <Modal
+                        aria-labelledby="transition-modal-title"
+                        aria-describedby="transition-modal-description"
+                        open={open}
+                        onClose={handleClose}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                            timeout: 500,
+                        }}
+                    >
+                        <Fade in={open}>
+                            <Card rounded className={useStyles.paper}>
+                                <CardContent>
+                                    <span>
+                                        <img className={style.image} src={image} alt="" />
+                                    </span>
+                                    <span>
+                                        <Typography variant="h5" id="transition-modal-title">Process to make <strong>{title}</strong></Typography>
+                                        <p id="transition-modal-description"><p>{process}</p></p>
+                                    </span>
+                                </CardContent>
+                            </Card>
+                        </Fade>
+                    </Modal>
                 </CardContent>
             </Card>
 

@@ -12,6 +12,7 @@ function App() {
   const [categoryMeals, setCategoryMeals] = useState([1, 2]);
   const [category, setCategory] = useState([]);
   const [selected, setSelected] = useState('Chicken');
+  const [process, setProcess] = useState('Chicken');
   const [meals, setMeals] = useState([]);
 
   // const APP_ID = '33995136';
@@ -35,14 +36,15 @@ function App() {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
     const data = await response.json();
     setMeals(data);
-    console.log(meals.meals[0].strInstructions);
-    setSelected(meals.meals[0].strInstructions)
+    // console.log(meals.meals[0].strInstructions);
+    setProcess(data.meals[0].strInstructions)
   }
 
   const getCategoryMeal = async (meal) => {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${meal}`);
     const data = await response.json();
     setCategoryMeals(data.meals);
+    setSelected(meal);
     console.log(categoryMeals)
     // console.log(meals)
   }
@@ -76,13 +78,13 @@ function App() {
       <div className="recipes">
         <Grid container spacing={1}>
           {categoryMeals.map(meal => (
-            <Grid item xs>
+            <Grid item sm>
               <Recipe
                 key={meal.idMeal}
                 title={meal.strMeal}
                 image={meal.strMealThumb}
                 clickAction={() => getMeal(meal.idMeal)}
-                process={selected}
+                process={process}
               />
             </Grid>
           ))}
