@@ -24,11 +24,12 @@ function Recipe({ key, title, image, clickAction, process }) {
         },
         paper: {
             backgroundColor: theme.palette.background.paper,
-            border: '2px solid #000',
+            border: '2px solid #fff',
             boxShadow: theme.shadows[5],
             padding: theme.spacing(2, 4, 3),
         },
     }));
+    const classes = useStyles();
 
 
     return (
@@ -37,13 +38,14 @@ function Recipe({ key, title, image, clickAction, process }) {
                 <CardContent align="center">
                     <span align="center">
                         <img className={style.image} src={image} alt="" />
-                        <Typography>{title}</Typography>
-                        <Button onClick={handleOpen} variant="outline" color="primary">Show Process</Button>
+                        <Typography variant="h6">{title}</Typography>
+                        <Button onClick={handleOpen} variant="outlined" color="primary">Show Process</Button>
                     </span>
                     <Modal
                         aria-labelledby="transition-modal-title"
                         aria-describedby="transition-modal-description"
                         open={open}
+                        className={classes.modal}
                         onClose={handleClose}
                         closeAfterTransition
                         BackdropComponent={Backdrop}
@@ -52,17 +54,18 @@ function Recipe({ key, title, image, clickAction, process }) {
                         }}
                     >
                         <Fade in={open}>
-                            <Card rounded className={useStyles.paper}>
+                            <Card rounded className={classes.paper}>
+                            <Button onClick={handleClose} variant="outlined">Close</Button>
                                 <CardContent>
                                     <span>
                                         <img className={style.image} src={image} alt="" />
                                     </span>
+                                    <hr />
                                     <span>
-                                        <Typography variant="h5" id="transition-modal-title">Process to make <strong>{title}</strong></Typography>
+                                        <Typography variant="h5" id="transition-modal-title"><strong>Process to make {title}</strong></Typography>
                                         <p id="transition-modal-description"><p>{process}</p></p>
                                     </span>
                                 </CardContent>
-                                <Button onClick={handleClose} variant="outlined">Close</Button>
                             </Card>
                         </Fade>
                     </Modal>

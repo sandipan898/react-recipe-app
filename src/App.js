@@ -74,7 +74,8 @@ function App() {
       <br />
       <hr />
 
-      <Typography variant="h4"> {selected} Recipies</Typography>
+      <Typography variant="h4"> {selected} Recipes</Typography>
+      <hr />
       <div className="recipes">
         <Grid container spacing={1}>
           {categoryMeals.map(meal => (
