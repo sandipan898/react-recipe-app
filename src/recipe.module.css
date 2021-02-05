@@ -3,7 +3,7 @@
     box-shadow: 0px 5px 20px rgba(71, 71, 71);
     margin: 20px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
     background: white;
     align-items: center;

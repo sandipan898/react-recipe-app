@@ -7,17 +7,13 @@ function Recipe({ key, title, image, clickAction, process }) {
 
     return (
         <Card onClick={() => clickAction(key)} className={style.recipe}>
+            <CardContent>
             <span>
                 <img className={style.image} src={image} alt="" />
                 <Typography>{title}</Typography>
-                {{
-                    if(process) {
-                        return (
-                            <p>{process}</p>
-                        )
-                    }
-                }}
+                <p>{process}</p>
             </span>
+            </CardContent>
         </Card>
 
     )

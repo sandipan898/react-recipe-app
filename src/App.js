@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Button, Grid, Container, FormControl, Typography, TextField, Select, InputLabel } from '@material-ui/core';
+import { Button, Grid, Container, FormControl, Box, Typography, InputLabel } from '@material-ui/core';
 import axios from 'axios';
 import './App.css';
 import Header from './components/Header';
@@ -9,11 +9,9 @@ import Category from './components/Category';
 
 function App() {
 
-  const [categoryMeals, setCategoryMeals] = useState([]);
-  const [search, setSearch] = useState("");
-  const [query, setQuery] = useState('chicken')
+  const [categoryMeals, setCategoryMeals] = useState([1, 2]);
   const [category, setCategory] = useState([]);
-  const [select, setSelect] = useState();
+  const [selected, setSelected] = useState('Chicken');
   const [meals, setMeals] = useState([]);
 
   // const APP_ID = '33995136';
@@ -23,17 +21,12 @@ function App() {
   const categoryEl = useRef()
   const amountEl = useRef()
 
-  // useEffect(() => {
-  //   getRecipes();
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [])
-
   useEffect(() => {
      axios.get('https://www.themealdb.com/api/json/v1/1/categories.php')
         .then(res => {
             setCategory(res.data.categories)
             console.log(category)
-            getCategoryMeal(res.data.categories[0]);
+            getCategoryMeal(res.data.categories[0].strCategory);
           }
         )
   }, [])
@@ -45,47 +38,25 @@ function App() {
     console.log(meals);
   }
   
-  const handleSearchChange = (e) => {
-    setSearch(e.target.value)
-    console.log(search)
-  }
-  
-  const getSearch = e => {
-    e.preventDefault();
-    setQuery(search);
-    setSearch('')
-  }
-
-  const handleSelectChange = (event) => {
-    setSelect(event.target.value);
-  };
-
-function handleSubmit(e) {
-  e.preventDefault()
-
-  axios
-      .get('https://opentdb.com/api.php', {
-          params: {
-              amount: amountEl.current.value,
-              category: categoryEl.current.value
-          }
-      })
-  }
-
   const getCategoryMeal = async (meal) => {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${meal}`);
     const data = await response.json();
-    setCategoryMeals(data);
+    setCategoryMeals(data.meals);
     console.log(categoryMeals)
-    console.log(meals)
+    // console.log(meals)
   }
 
   return (
     <div className="App">
       <Header />
 
-      <Container className="">
-        <Grid container spacing={8}>
+      <br />
+      <hr />
+      
+      <Typography variant="h3">Recipe Categories</Typography>
+
+        <div className="recipes">
+        <Grid container xs spacing={1}>
           {category.map(category => {
               return (
                 <Grid item xs>
@@ -94,22 +65,26 @@ function handleSubmit(e) {
               )
           })}
         </Grid>
-      </Container>
+        </div>
 
-      {/* <form onSubmit={getSearch} className="search-form">
-        <input className="search-bar" type="text" value={search} onChange={handleSearchChange} />
-        <button className="search-btn" type="submit">Search</button>
-      </form> */}
-
+      <br />
+      <hr />
+      
+      <Typography variant="h3"> {selected} Recipies</Typography>
       <div className="recipes">
-      {meals.map(meal => (
+      <Grid container spacing={1}>
+      {categoryMeals.map(meal => (
+        <Grid item xs>
         <Recipe
           key={meal.idMeal} 
           title={meal.strMeal}
           image={meal.strMealThumb} 
           clickAction={() => getMeal(meal.idMeal)}
+          process={meal.process}
         />
+        </Grid>
       ))}
+      </Grid>
       </div>
     </div>
   );
