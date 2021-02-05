@@ -1,9 +1,10 @@
 import React from 'react'
+import { Button, Typography} from '@material-ui/core';
 
 function Header() {
     return (
         <div>
-          <h1>Recipe App</h1>
+          <Typography variant="h2">Recipe App</Typography>
         </div>
     )
 }
