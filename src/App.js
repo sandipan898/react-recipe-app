@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
-import Recipe from './components/Recipe';
+import { TextField } from "material-ui/core";
 
+import './App.css';
+import Header from './components/Header';
+import Recipe from './components/Recipe';
 function App() {
   
   const [recipes, setRecipes] = useState([]);
@@ -14,15 +16,13 @@ function App() {
 
   useEffect(() => {
     getRecipes();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
   const getRecipes = async () => {
     const response = await fetch(API);
     const data = await response.json();
     setRecipes(data.hits);
-  //   fetch(API)
-  //   .then(response => response.json)
-  //   .then(data => console.log(data))
   }
 
   const handleSearchChange = (e) => {
@@ -38,9 +38,9 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Recipe App</h1>
+      <Header />
       <form onSubmit={getSearch} className="search-form">
-        <input className="search-bar" type="text" value={search} onChange={handleSearchChange} />
+        <TextField id="filled-basic" label="Filled" variant="filled" className="search-bar" value={search} onChange={handleSearchChange} />
         <button className="search-btn" type="submit">Search</button>
       </form>
       <div className="recipes">
