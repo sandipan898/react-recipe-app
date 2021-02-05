@@ -27,14 +27,15 @@ function App() {
   //   getRecipes();
   // // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [])
-  
 
   useEffect(() => {
-    axios.get('https://www.themealdb.com/api/json/v1/1/categories.php')
+     axios.get('https://www.themealdb.com/api/json/v1/1/categories.php')
         .then(res => {
             setCategory(res.data.categories)
             console.log(category)
-        })
+            getCategoryMeal(res.data.categories[0]);
+          }
+        )
   }, [])
 
   const getMeal = async (id) => {
@@ -95,13 +96,13 @@ function handleSubmit(e) {
         </Grid>
       </Container>
 
-      <form onSubmit={getSearch} className="search-form">
+      {/* <form onSubmit={getSearch} className="search-form">
         <input className="search-bar" type="text" value={search} onChange={handleSearchChange} />
         <button className="search-btn" type="submit">Search</button>
-      </form>
+      </form> */}
 
       <div className="recipes">
-      {categoryMeals.meals.map(meal => (
+      {meals.map(meal => (
         <Recipe
           key={meal.idMeal} 
           title={meal.strMeal}

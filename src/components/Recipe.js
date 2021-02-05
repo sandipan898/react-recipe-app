@@ -1,12 +1,25 @@
 import React from 'react'
+import { Card, Container, Typography, CardMedia, CardContent } from "@material-ui/core";
 import style from '../recipe.module.css'
 
-function Recipe({key, title, image, clickAction}) {
+function Recipe({ key, title, image, clickAction, process }) {
+
+
     return (
-        <div onClick={()=> clickAction(key)} className={style.recipe}>
-            <img className= {style.image} src={image} alt="" />
-            <h1>{title}</h1>
-        </div> 
+        <Card onClick={() => clickAction(key)} className={style.recipe}>
+            <span>
+                <img className={style.image} src={image} alt="" />
+                <Typography>{title}</Typography>
+                {{
+                    if(process) {
+                        return (
+                            <p>{process}</p>
+                        )
+                    }
+                }}
+            </span>
+        </Card>
+
     )
 }
 

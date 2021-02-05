@@ -1,18 +1,18 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { Card, Grid, Button, Typography, makeStyles, CardMedia, CardContent } from "@material-ui/core";
+import { Card, Button, Typography, CardMedia, CardContent } from "@material-ui/core";
 import '../category.css';
 
 function Category({ key, name, image, clickAction }) {
 
     return (
         <Card className="">
-            <span>
+            <CardContent align="center">
+                <Typography variant="h5" className="">{name}</Typography>
                 <img src={image} alt=""></img>
-            </span>
-            <Typography>{name}</Typography>
-            <Button onClick={() => clickAction(key)} variant="contained" color="primary" >Explore</Button>
-            <span className="card">
-            </span>
+                <div className="">
+                    <Button className="btn" onClick={() => clickAction(key)} variant="contained" color="secondary" >Explore Dishes</Button>
+                </div>
+            </CardContent>
         </Card>
     )
 }
