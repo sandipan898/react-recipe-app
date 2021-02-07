@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import { Card, Backdrop, Fade, Modal, Grid, Typography, makeStyles, CardContent, Button } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 import style from '../recipe.module.css'

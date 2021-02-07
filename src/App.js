@@ -29,36 +29,31 @@ function App() {
       .then(res => {
         setCategory(res.data.categories)
         getCategoryMeal(res.data.categories[0].strCategory);
-        // console.log(category)
         }
       )
   }, [])
 
-  const makeIngredientsArray = (meal) => {
-    console.log("making ingredients")
-    const exp = /strIngredient(\d*)/i;
-    let pattern = new RegExp(exp);
+  // const makeIngredientsArray = (meal) => {
+  //   console.log("making ingredients")
+  //   const exp = /strIngredient(\d*)/i;
+  //   let pattern = new RegExp(exp);
 
-    const mealItem = Object.keys(meal)
-    let ingredients = [];
+  //   const mealItem = Object.keys(meal)
+  //   let ingredients = [];
 
-    for(let i in mealItem) {
-      if(pattern.test(mealItem[i]) && meal[mealItem[i]]!=="") {
-        ingredients.push(meal[mealItem[i]])
-       } 
-    }
-    setIngredients(ingredients)
-  }
+  //   for(let i in mealItem) {
+  //     if(pattern.test(mealItem[i]) && meal[mealItem[i]]!=="") {
+  //       ingredients.push(meal[mealItem[i]])
+  //      } 
+  //   }
+  //   setIngredients(ingredients)
+  // }
 
   const getMeal = async (id) => {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
     const data = await response.json();
     setSelectedMeal(data.meals[0]);
-    console.log(selectedMeal)
     // makeIngredientsArray(selectedMeal);
-    // console.log(ingredients)
-    // console.log(meals.meals[0].strInstructions);
-    // setYoutubeLink(meals.strYoutube)
   }
 
   const getCategoryMeal = async (meal) => {
