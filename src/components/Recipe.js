@@ -1,14 +1,16 @@
-import React from 'react'
-import { Card, Backdrop, Fade, Modal, ModalBody, ModalHeader,  Typography, makeStyles, CardContent, Button } from "@material-ui/core";
+import React, {useEffect} from 'react'
+import { Card, Backdrop, Fade, Modal, Grid, Typography, makeStyles, CardContent, Button } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 import style from '../recipe.module.css'
 
-function Recipe({ key, title, image, clickAction, process, youtubeLink , tags}) {
+function Recipe({ key, title, image, clickAction, process, youtubeLink, tags, ingredients }) {
 
+    // useEffect(() => {clickAction(key)}, [])
+        
     const [open, setOpen] = React.useState(false);
 
     const handleOpen = () => {
-        setOpen(true);
+        setOpen(true)
     };
 
     const handleClose = () => {
@@ -20,12 +22,11 @@ function Recipe({ key, title, image, clickAction, process, youtubeLink , tags}) 
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            margin: 100,
+            margin: 40,
             marginLeft: '10%',
             marginRight: '10%',
-            maxHeight: "calc(100vh - 210px)",
+            maxHeight: "calc(100vh - 100px)",
             overflowY: "auto"
-            // padding: '100px'
         },
         paper: {
             backgroundColor: theme.palette.background.paper,
@@ -44,8 +45,10 @@ function Recipe({ key, title, image, clickAction, process, youtubeLink , tags}) 
                     <span align="center">
                         <img className={style.image} src={image} alt="" />
                         <Typography variant="h6">{title}</Typography>
-                        <Typography><strong>Tags: </strong>{tags}</Typography>
-                        <Button onClick={handleOpen} variant="outlined" color="primary">Show Process</Button>
+                        <Button onClick={() => {
+                            // clickAction(key);
+                            handleOpen() 
+                            }} variant="outlined" color="primary">Show Recipe</Button>
                     </span>
                     <Modal
                         aria-labelledby="transition-modal-title"
@@ -61,13 +64,23 @@ function Recipe({ key, title, image, clickAction, process, youtubeLink , tags}) 
                     >
                         <Fade in={open}>
                             <Card rounded className={classes.paper}>
-                            <Button onClick={handleClose} variant="outlined"> <CloseIcon /> </Button>
+                                <Button onClick={handleClose} variant="outlined"> <CloseIcon /> </Button>
                                 <CardContent>
-                                    <span>
-                                        <img className={style.image} src={image} alt="" />
-                                    </span>
+                                    <Grid container spacing={1}>
+                                        <Grid item sm>
+                                            <span>
+                                                <img className={style.image} src={image} alt="" />
+                                            </span>
+                                        </Grid>
+                                        <Grid item sm>
+                                            <ul>
+                                            {ingredients? ingredients.map((ingredient) => (<li>{ingredient}</li>)) : ''}
+                                            </ul>
+                                        </Grid>
+                                    </Grid>
                                     <hr />
                                     <Typography>Video Tutorial: <a target="_blank" rel="noreferrer" href={youtubeLink}>{youtubeLink}</a> </Typography>
+                                    {tags ? <Typography><strong>Tags: </strong>{tags}</Typography> : <div></div>}
                                     <span>
                                         <Typography variant="h5" id="transition-modal-title"><strong>Process to make {title}</strong></Typography>
                                         <p id="transition-modal-description"><p>{process}</p></p>
