@@ -1,6 +1,8 @@
 import React from 'react'
-import { Card, Backdrop, Fade, Modal, Grid, Typography, makeStyles, CardContent, Button } from "@material-ui/core";
+import { Card, Backdrop, Divider, Fade, Modal, Grid, Typography, makeStyles, CardContent, Button } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
+import YouTube from '@material-ui/icons/YouTube';
+import LabelIcon from '@material-ui/icons/Label';
 import style from '../recipe.module.css'
 
 function Recipe({ key, title, image, clickAction, process, youtubeLink, tags, ingredients }) {
@@ -23,8 +25,8 @@ function Recipe({ key, title, image, clickAction, process, youtubeLink, tags, in
             alignItems: 'center',
             justifyContent: 'center',
             margin: 40,
-            marginLeft: '10%',
-            marginRight: '10%',
+            marginLeft: '15%',
+            marginRight: '15%',
             maxHeight: "calc(100vh - 100px)",
             overflowY: "auto"
         },
@@ -64,27 +66,33 @@ function Recipe({ key, title, image, clickAction, process, youtubeLink, tags, in
                     >
                         <Fade in={open}>
                             <Card rounded className={classes.paper}>
-                                <Button onClick={handleClose} variant="outlined"> <CloseIcon /> </Button>
+                                <Button onClick={handleClose} variant="outlined" color="secondary"> <CloseIcon /> </Button>
                                 <CardContent>
                                     <Grid container spacing={1}>
                                         <Grid item sm>
                                             <span>
                                                 <img className={style.image} src={image} alt="" />
                                             </span>
+                                            <hr />
+                                            {tags ? <Typography variant="subtitle1"><LabelIcon style={{fontSize: 12}} /> <strong>Tags: </strong>{tags}</Typography> : <div></div>}
+                                            <br />
+                                            <Button
+                                                variant="contained"
+                                                color="default"
+                                                // className={classes.button}
+                                                endIcon={<YouTube style={{fontSize: 35}} color="secondary"/>}>Video Tutorial <a target="_blank" rel="noreferrer" href={youtubeLink}> </a></Button>
                                         </Grid>
-                                        <Grid item sm>
-                                            <ul>
+                                        <Divider orientation="vertical" flexItem variant="inset" />
+                                        <Grid item xs={8}>
+                                            {/* <ul>
                                             {ingredients? ingredients.map((ingredient) => (<li>{ingredient}</li>)) : ''}
-                                            </ul>
+                                            </ul> */}
+                                            <span>
+                                                <Typography variant="h5" id="transition-modal-title"><strong>Process to make {title}</strong></Typography>
+                                                <p id="transition-modal-description"><p>{process}</p></p>
+                                            </span>
                                         </Grid>
                                     </Grid>
-                                    <hr />
-                                    <Typography>Video Tutorial: <a target="_blank" rel="noreferrer" href={youtubeLink}>{youtubeLink}</a> </Typography>
-                                    {tags ? <Typography><strong>Tags: </strong>{tags}</Typography> : <div></div>}
-                                    <span>
-                                        <Typography variant="h5" id="transition-modal-title"><strong>Process to make {title}</strong></Typography>
-                                        <p id="transition-modal-description"><p>{process}</p></p>
-                                    </span>
                                 </CardContent>
                             </Card>
                         </Fade>
