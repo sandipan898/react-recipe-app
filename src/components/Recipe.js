@@ -2,9 +2,8 @@ import React from 'react'
 import { Card, Backdrop, Fade, Modal, ModalBody, ModalHeader,  Typography, makeStyles, CardContent, Button } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 import style from '../recipe.module.css'
-import { CallReceived } from '@material-ui/icons';
 
-function Recipe({ key, title, image, clickAction, process }) {
+function Recipe({ key, title, image, clickAction, process, youtubeLink , tags}) {
 
     const [open, setOpen] = React.useState(false);
 
@@ -22,6 +21,8 @@ function Recipe({ key, title, image, clickAction, process }) {
             alignItems: 'center',
             justifyContent: 'center',
             margin: 100,
+            marginLeft: '10%',
+            marginRight: '10%',
             maxHeight: "calc(100vh - 210px)",
             overflowY: "auto"
             // padding: '100px'
@@ -43,6 +44,7 @@ function Recipe({ key, title, image, clickAction, process }) {
                     <span align="center">
                         <img className={style.image} src={image} alt="" />
                         <Typography variant="h6">{title}</Typography>
+                        <Typography><strong>Tags: </strong>{tags}</Typography>
                         <Button onClick={handleOpen} variant="outlined" color="primary">Show Process</Button>
                     </span>
                     <Modal
@@ -59,12 +61,13 @@ function Recipe({ key, title, image, clickAction, process }) {
                     >
                         <Fade in={open}>
                             <Card rounded className={classes.paper}>
-                            <Button onClick={handleClose} variant="outlined">Close</Button>
+                            <Button onClick={handleClose} variant="outlined"> <CloseIcon /> </Button>
                                 <CardContent>
                                     <span>
                                         <img className={style.image} src={image} alt="" />
                                     </span>
                                     <hr />
+                                    <Typography>Video Tutorial: <a target="_blank" rel="noreferrer" href={youtubeLink}>{youtubeLink}</a> </Typography>
                                     <span>
                                         <Typography variant="h5" id="transition-modal-title"><strong>Process to make {title}</strong></Typography>
                                         <p id="transition-modal-description"><p>{process}</p></p>

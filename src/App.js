@@ -12,9 +12,11 @@ function App() {
 
   const [categoryMeals, setCategoryMeals] = useState([1, 2]);
   const [category, setCategory] = useState([]);
-  const [selected, setSelected] = useState('Chicken');
-  const [process, setProcess] = useState('Chicken');
-  const [meals, setMeals] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState('Chicken');
+  const [selectedMeal, setSelectedMeal] = useState([]);
+  // const [process, setProcess] = useState('Chicken');
+  // const [youtubeLink, setYoutubeLink] = useState([]);
+  // const [tags, setTags] = useState([]);
 
   // const APP_ID = '33995136';
   // const APP_KEY = '23af0629cc81af56228ee976e60320ed';
@@ -24,8 +26,8 @@ function App() {
     axios.get('https://www.themealdb.com/api/json/v1/1/categories.php')
       .then(res => {
         setCategory(res.data.categories)
-        console.log(category)
         getCategoryMeal(res.data.categories[0].strCategory);
+        // console.log(category)
       }
       )
   }, [])
@@ -33,17 +35,20 @@ function App() {
   const getMeal = async (id) => {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
     const data = await response.json();
-    setMeals(data);
+    setSelectedMeal(data.meals[0]);
+    console.log(selectedMeal)
     // console.log(meals.meals[0].strInstructions);
-    setProcess(data.meals[0].strInstructions)
+    // setProcess(meals.strInstructions)
+    // setYoutubeLink(meals.strYoutube)
+    // setTags(meals.strTags)
   }
 
   const getCategoryMeal = async (meal) => {
     const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${meal}`);
     const data = await response.json();
     setCategoryMeals(data.meals);
-    setSelected(meal);
-    console.log(categoryMeals)
+    setSelectedCategory(meal);
+    // console.log(categoryMeals)
     // console.log(meals)
   }
 
@@ -72,7 +77,7 @@ function App() {
       <br />
       <hr />
 
-      <Typography variant="h4"> {selected} Recipes</Typography>
+      <Typography variant="h4"> {selectedCategory} Recipes</Typography>
       <hr />
       <div className="recipes">
         <Grid container spacing={1}>
@@ -83,7 +88,9 @@ function App() {
                 title={meal.strMeal}
                 image={meal.strMealThumb}
                 clickAction={() => getMeal(meal.idMeal)}
-                process={process}
+                process={selectedMeal.strInstructions}
+                youtubeLink={selectedMeal.strYoutube}
+                tags={selectedMeal.strTags}
               />
             </Grid>
           ))}
