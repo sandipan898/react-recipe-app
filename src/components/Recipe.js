@@ -2,6 +2,7 @@ import React from 'react'
 import { Card, Backdrop, Fade, Modal, ModalBody, ModalHeader,  Typography, makeStyles, CardContent, Button } from "@material-ui/core";
 import CloseIcon from '@material-ui/icons/Close';
 import style from '../recipe.module.css'
+import { CallReceived } from '@material-ui/icons';
 
 function Recipe({ key, title, image, clickAction, process }) {
 
@@ -14,12 +15,15 @@ function Recipe({ key, title, image, clickAction, process }) {
     const handleClose = () => {
         setOpen(false);
     };
+
     const useStyles = makeStyles((theme) => ({
         modal: {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            margin: 100
+            margin: 100,
+            maxHeight: "calc(100vh - 210px)",
+            overflowY: "auto"
             // padding: '100px'
         },
         paper: {

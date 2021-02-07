@@ -20,9 +20,6 @@ function App() {
   // const APP_KEY = '23af0629cc81af56228ee976e60320ed';
   // const API = `https://api.edamam.com/search?q=${query}&app_id=${APP_ID}&app_key=${APP_KEY}`
 
-  const categoryEl = useRef()
-  const amountEl = useRef()
-
   useEffect(() => {
     axios.get('https://www.themealdb.com/api/json/v1/1/categories.php')
       .then(res => {
@@ -56,7 +53,7 @@ function App() {
 
       <br />
       <hr />
-
+      
       <Typography variant="h4">Recipe Categories</Typography>
       <br />
 
