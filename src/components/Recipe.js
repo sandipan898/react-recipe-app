@@ -70,6 +70,7 @@ function Recipe({ key, title, image, clickAction, process, youtubeLink, tags, in
                                 <CardContent>
                                     <Grid container spacing={1}>
                                         <Grid item sm>
+                                        <Typography variant="h6" id="transition-modal-title">{title}</Typography>
                                             <span>
                                                 <img className={style.image} src={image} alt="" />
                                             </span>
@@ -79,8 +80,10 @@ function Recipe({ key, title, image, clickAction, process, youtubeLink, tags, in
                                             <Button
                                                 variant="contained"
                                                 color="default"
-                                                // className={classes.button}
-                                                endIcon={<YouTube style={{fontSize: 35}} color="secondary"/>}>Video Tutorial <a target="_blank" rel="noreferrer" href={youtubeLink}> </a></Button>
+                                                component="a"
+                                                target="_blank"
+                                                href={youtubeLink}
+                                                endIcon={<YouTube style={{fontSize: 35}} color="secondary"/>}>Video Tutorial</Button>
                                         </Grid>
                                         <Divider orientation="vertical" flexItem variant="inset" />
                                         <Grid item xs={8}>
