@@ -5,6 +5,7 @@ import './App.css';
 import Header from './components/Header';
 import Recipe from './components/Recipe';
 import Category from './components/Category';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -91,6 +92,9 @@ function App() {
           ))}
         </Grid>
       </div>
+
+      <br />
+      <Footer />
     </div>
   );
 }
